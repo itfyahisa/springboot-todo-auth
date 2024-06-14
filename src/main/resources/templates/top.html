@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>TopPage</title>
+</head>
+<body>
+	<h1 class="mt-3">Todo App Top</h1>
+	<ul>
+		<li><a href = "/user/register.html" th:href = "@{user/register}">ユーザー登録</a></li>
+		<li><a href = "/user/login.html" th:href = "@{user/login}">ログイン</a></li>
+		<li><a href = "/user/logout.html" th:href = "@{user/logout}">ログアウト</a></li>
+		<li><a href = "/user/index.html" th:href = "@{/users}">ユーザー一覧</a></li>
+		<li><a href = "/todo/index.html" th:href = "@{/todos}">todo一覧</a></li>
+	</ul>
+</body>
+</html>
+

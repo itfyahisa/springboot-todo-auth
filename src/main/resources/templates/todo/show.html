@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>todo詳細</title>
+</head>
+<body>
+	<h1>todo詳細</h1>
+	<a href = "...top.html" th:href="@{/top}">トップページ</a>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>タイトル</th>
+				<th>ステータス</th>
+				<th>詳細</th>
+			</tr>								
+		</thead>	
+		<tbody>
+			<tr>
+				<td th:text="${todo.id}"></td>
+				<td th:text="${todo.title}"></td>
+				<td th:text="${todo.status}"></td>
+				<td th:text="${todo.details}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<form th:action="@{/todos/{id}(id=${todo.id})}" th:method="post" th:object="${todoRequest}">
+		<input type="hidden" name="_method" value="put" />
+		
+		<!-- title-->
+		<div>
+			<label id="titleInput">タイトル</label>
+			<input type="text" id="titleInput" 
+				th:field = "*{title}" th:classappend="${#fields.hasErrors('title')} ? is-invalid"
+			>
+			<p class="invalid-feedback" 
+				th:if="${#fields.hasErrors('title')} ? is-invalid" 
+				th:errors="*{title}"
+			>(error)</p>
+			
+		</div>
+		
+		<!-- status -->		
+		<div>
+			<label id="statusInput">ステータス</label>
+			<input type="text" id="statusInput" 
+				th:field = "*{status}" th:classappend="${#fields.hasErrors('status')} ? is-invalid"
+			>
+			<p class="invalid-feedback"
+				th:if="${#fields.hasErrors('status')} ? is-invalid"
+				th:errors="*{status}"
+			>(error)</p>
+		</div>
+		
+		<!-- 詳細 -->		
+		<div>
+			<label id="detailsInput">詳細</label>
+			<input type="text" id="detailsInput" 
+				th:field = "*{details}" th:classappend="${#fields.hasErrors('details')} ? is-invalid"
+			>
+			<p class="invalid-feedback"
+				th:if="${#fields.hasErrors('details')} ? is-invalid"
+				th:errors="*{details}"
+			>(error)</p>
+		</div>	
+		
+		<!-- ボタン -->
+		<div>
+			<button type="submit">更新</button>
+			<a href = "../top.html" th:href="@{/top}">キャンセル</a>
+		</div>
+		
+	</form>	
+	
+	<form th:action="@{/todos/{id}(id=${todo.id})}" th:method="delete">
+		<div>
+			<button type="submit">削除</button>
+		</div>
+	</form>
+</body>
+</html>

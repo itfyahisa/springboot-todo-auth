@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ユーザー作成</title>
+</head>
+<body>
+	<h1>ユーザー作成</h1>
+	<div>
+		<a href="..top.html" th:href="@{/top}">トップページ</a>
+	</div>
+	 
+	<form action="#" th:action="@{/user/register}" method="post" th:object="${userForm}">
+		<!-- email -->
+		<div>
+			<label id="emailInput">メールアドレス</label>
+			<input type="text" id="emailInput" 
+				th:field = "*{email}" th:classappend="${#fields.hasErrors('email')} ? is-invalid"
+			>
+			<p class="invalid-feedback" 
+				th:if="${#fields.hasErrors('email')} ? is-invalid" 
+				th:errors="*{email}"
+			>(error)</p>
+			
+		</div>
+		
+		<!-- password -->		
+		<div>
+			<label id="passwordInput">パスワード</label>
+			<input type="text" id="passwordInput" 
+				th:field = "*{password}" th:classappend="${#fields.hasErrors('password')} ? is-invalid"
+			>
+			<p class="invalid-feedback"
+				th:if="${#fields.hasErrors('password')} ? is-invalid"
+				th:errors="*{password}"
+			>(error)</p>
+		</div>
+		
+		<!-- ボタン -->
+		<div>
+			<button type="submit">作成</button>
+			<a href = "../top.html" th:href="@{/top}">キャンセル</a>
+		</div>
+		
+	</form>
+	
+</body>
+</html>

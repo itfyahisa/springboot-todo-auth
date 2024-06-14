@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.todo.app.mapper.TodoMapper">
+
+	<select id = "findAll" resultType = "com.todo.app.entity.Todo">
+		SELECT * FROM todo;
+	</select>
+
+	<select id = "findById" resultType = "com.todo.app.entity.Todo">
+		SELECT * FROM todo WHERE id = #{id};
+	</select>
+	
+	<insert id = "insert" useGeneratedKeys = "true" keyProperty = "id">
+		INSERT INTO todo(title, status, details) VALUES(#{title}, #{status}, #{details});
+	</insert>
+	
+	<update id = "update">
+		UPDATE todo SET 
+			title = #{title},
+			status = #{status},
+			details = #{details}
+			WHERE id = #{id};
+	</update>
+	
+	<delete id = "delete">
+		DELETE FROM todo WHERE id = #{id};
+	</delete>
+	
+</mapper>
