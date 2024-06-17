@@ -39,7 +39,7 @@ public class WebController {
 	}
 	
 	@GetMapping("user/login")
-	public String lginForm() {
+	public String loginForm() {
 		return "user/login";
 	}
 	
@@ -49,18 +49,20 @@ public class WebController {
 	}
 	
 	@GetMapping("/users")
-	public String index(Model model) {
-		model.addAttribute("userList", userService.findAll());
+	public String index(Model model) { //ビューに渡すデータを保持するmodelオブジェクト
+		model.addAttribute("userList", userService.findAll()); //ビューで利用するuserListにデータを渡す。
 		return "user/index";
 	}
 	
 	@GetMapping("/user/register")
-	public String createForm(@ModelAttribute UserForm userForm) {
+	public String createForm(@ModelAttribute UserForm userForm) { //model.attributeの省略版
+//		model.attribute("userForm", new UserForm());
 		return "user/register";
 	}
 	
 	@PostMapping("/user/register")
-	public String register(@Validated UserForm userForm, BindingResult bindingResult) {
+	public String register(@Validated UserForm userForm, BindingResult bindingResult) { 
+		//userFormに対してバリデーションを行ってその結果がbindingResultに入る。
 		if(bindingResult.hasErrors()) {
 			return "user/register";
 		}else {
@@ -70,10 +72,10 @@ public class WebController {
 	}
 	
 	@GetMapping("/todos")
-	public String getAllTodos(Model model, TodoRequest todoRequest) {
+	public String getAllTodos(Model model, @ModelAttribute TodoRequest todoRequest) {
 		List<TodoResponse> todos = todoService.getAllTodo();
-		model.addAttribute("todos", todos);
-		model.addAttribute("todoRequest", new TodoRequest());
+		model.addAttribute("todos", todos); //indexにリダイレクトする時に全データ取得する必要あり。
+//		model.addAttribute("todoRequest", new TodoRequest());
 		return "todo/index";
 	}
 	
@@ -89,7 +91,7 @@ public class WebController {
 	public String getTodo(@PathVariable("id") Long id, Model model) {
 		TodoResponse todo = todoService.getTodo(id);
 		model.addAttribute("todo", todo);
-		model.addAttribute("todoRequest", new TodoRequest());
+		model.addAttribute("todoRequest", new TodoRequest()); //更新用リクエストオブジェクト作成
 		return "todo/show";
 	}
 	

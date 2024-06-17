@@ -16,8 +16,8 @@ public class Todo {
 	private String status; 
 	private String details;
 	
-	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@ManyToOne //多対1
+	@JoinColumn(name = "user_id") //FKを管理する、SQLでのカラム名
 	private Long userId;
 	
 }

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String>{
+//	アノテーション(UniqueEmail), String(email)
 	
 	private final UserMapper userMapper;
 
@@ -15,7 +16,5 @@ public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, St
 	public boolean isValid(String value, ConstraintValidatorContext context) {
 		return userMapper.findByEmail(value).isEmpty();
 	}
-	
-	
 	
 }

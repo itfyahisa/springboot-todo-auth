@@ -30,13 +30,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 //		);
 //	}
 	
-//    @Override
-//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//        Optional<User> optionalUser = userMapper.findByUsername(email);
-//        User user = optionalUser.orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-//        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
-//    }
-	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
 		User user = userMapper.findByEmail(email)
@@ -46,5 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		CustomUserDetails customUserDetails = new CustomUserDetails(user.getEmail(), user.getPassword(), Collections.emptyList());
 		return customUserDetails;
 	}
+	// UserDetailsServiceでログイン処理を実装する。
+	// emailログインに変更
 
 }

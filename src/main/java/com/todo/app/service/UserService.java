@@ -37,7 +37,9 @@ public class UserService {
 	
 	public Optional<User> getCurrentUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		//セキュリティコンテキストを取得→認証情報取得
 		CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();
+		//authentication.getPrincipal() 認証されているユーザー情報を取得、ユーザー情報はcustomUserDetailsの型になおす
 		return userMapper.findByEmail(customUserDetails.getEmail());
 	}
 }
