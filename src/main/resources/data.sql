@@ -1,7 +1,7 @@
-INSERT INTO todo(title, status, details) 
+INSERT INTO todo(user_id, title, status, details) 
 VALUES
-	("test1", "test1", "test1"),
-	("test2", "test2", "test2");
+	(1,"test1", "test1", "test1"),
+	(2,"test2", "test2", "test2");
 	
 INSERT INTO users(email, password)
 VALUES

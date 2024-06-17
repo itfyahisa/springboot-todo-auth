@@ -16,5 +16,8 @@ public class CustomUserDetails extends User {
 		super(email, password, authorities);
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
-
+	
+	public String getEmail() {
+		return getUsername();
+	}
 }

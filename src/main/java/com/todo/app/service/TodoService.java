@@ -2,6 +2,7 @@ package com.todo.app.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.todo.app.dto.TodoRequest;
 import com.todo.app.dto.TodoResponse;
 import com.todo.app.entity.Todo;
+import com.todo.app.entity.User;
 import com.todo.app.exception.TodoNotFoundException;
 import com.todo.app.mapper.TodoMapper;
 
@@ -21,6 +23,7 @@ public class TodoService {
 
 //	@Autowired
 	private final TodoMapper todoMapper;
+	private final UserService userService;
 	
 	public List<TodoResponse> getAllTodo(){
 		List<Todo> todoList = todoMapper.findAll();
@@ -47,6 +50,8 @@ public class TodoService {
 	public TodoResponse addTodo(TodoRequest todoRequest) {
 		Todo todo = new Todo();
 		BeanUtils.copyProperties(todoRequest, todo);
+		User currentUser = userService.getCurrentUser().orElseThrow();
+		todo.setUserId(currentUser.getId());
 		todoMapper.insert(todo);
 		TodoResponse todoResponse = new TodoResponse(todo);
 		return todoResponse;

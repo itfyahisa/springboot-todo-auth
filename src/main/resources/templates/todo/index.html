@@ -11,6 +11,7 @@
 		<thead>
 			<tr>
 				<th>id</th>
+				<th>ユーザーID</th>
 				<th>タイトル</th>
 				<th>ステータス</th>
 				<th>詳細</th>
@@ -19,6 +20,7 @@
 		<tbody>
 			<tr th:each="todo:${todos}">
 				<td><a th:href ="@{/todos/{id}(id=${todo.id})}" th:text="${todo.id}"></a></td>
+				<td th:text="${todo.userId}"></td>
 				<td th:text="${todo.title}"></td>
 				<td th:text="${todo.status}"></td>
 				<td th:text="${todo.details}"></td>

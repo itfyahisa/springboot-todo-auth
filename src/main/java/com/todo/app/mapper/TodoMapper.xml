@@ -11,7 +11,7 @@
 	</select>
 	
 	<insert id = "insert" useGeneratedKeys = "true" keyProperty = "id">
-		INSERT INTO todo(title, status, details) VALUES(#{title}, #{status}, #{details});
+		INSERT INTO todo(user_id, title, status, details) VALUES(#{userId}, #{title}, #{status}, #{details});
 	</insert>
 	
 	<update id = "update">
